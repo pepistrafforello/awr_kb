@@ -18,6 +18,10 @@
 
 # Importing Wikidata to DGraph
 
+## Downloading Wikidata dump
+
+use `wikidata-tools/wd_download_latest.sh` to download the most recent Wikidata dump to file `latest-all.json.bz2`
+
 ## Converting Wikidata dump to RDF N-quads
 
 check/change hard-coded input file name in wikidata-tools/wd2dgraph2.py
@@ -28,7 +32,7 @@ mkdir input_data
 ./run_chunks.sh # runs python wd2dgraph2.py START END splitting the work in 10 concurrent chunks
 ```
 
-The input consists of file `latest-all.json.bz2`, downloaded from https://dumps.wikimedia.org/wikidatawiki/entities/latest-all.json.bz2 and hardcoded in script `wikidata-tools/wd2dgraph2.py`
+The input consists of file `latest-all.json.bz2`, hard-coded in `wikidata-tools/wd2dgraph2.py`
 
 The N-quads files will be created in folder input_data; there will be more than 3M files (3,276,356 as of July 2021), taking 41 GB of disk space.
 
@@ -91,29 +95,17 @@ once DGraph is up, load the collections from the old AW, see kb_data/read.py
 Script to run the whole workflow with our typical Docker deployment:
 ```shell
 #!/bin/bash
-
 cd /docker
-
 docker-compose down
-
 pushd /data/20210729
-
 \rm -rf alpha1  alpha4  zero1
-
 mkdir zero1
-
 tar xf 0.tar
-
 mv 0 alpha1
-
 tar xf 1.tar
-
 mv 1 alpha4
-
 popd
-
 docker-compose up --no-start
-
 docker-compose start zero1
 
 sleep 30
@@ -124,7 +116,6 @@ curl 'localhost:6080/assign?what=uids&num=110000000' | jq
 docker-compose start alpha1
 
 sleep 60
-
 
 docker-compose start alpha4
 
