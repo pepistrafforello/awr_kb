@@ -16,11 +16,16 @@
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+Copyright 2021 [Expert System USA](https://expertsystem.us) <br/>
+Licensing information in [LICENSE.md](./LICENSE.md)
+
 # Importing Wikidata to DGraph
+
+This repo contains instructions so create a Dgraph database from a Wikidata dump; it imports a selected set of properties, in English language only.
 
 ## Downloading Wikidata dump
 
-use `wikidata-tools/wd_download_latest.sh` to download the most recent Wikidata dump to file `latest-all.json.bz2`
+use [`wikidata-tools/wd_download_latest.sh`](wikidata-tools/wd_download_latest.sh) to download the most recent Wikidata dump [`latest-all.json.bz2`](https://dumps.wikimedia.org/wikidatawiki/entities/latest-all.json.bz2)
 
 ## Converting Wikidata dump to RDF N-quads
 
@@ -32,13 +37,13 @@ mkdir input_data
 ./run_chunks.sh # runs python wd2dgraph2.py START END splitting the work in 10 concurrent chunks
 ```
 
-The input consists of file `latest-all.json.bz2`, hard-coded in `wikidata-tools/wd2dgraph2.py`
+The input consists of file `latest-all.json.bz2`, hard-coded in [`wikidata-tools/wd2dgraph2.py`](./wikidata-tools/wd2dgraph2.py)
 
-The N-quads files will be created in folder input_data; there will be more than 3M files (3,276,356 as of July 2021), taking 41 GB of disk space.
+The N-quads files will be created in folder `input_data` with more than 3M files (3,276,356 as of July 2021) taking 41 GB of disk space.
 
 ## Note about the schema
 
-The schema definition is in `wikidata-tools/schema.txt`
+The schema definition is in [`wikidata-tools/schema.txt`](wikidata-tools/schema.txt)
 
 ## Bulk loading DGraph
 
@@ -77,7 +82,7 @@ docker-compose logs alpha4=1 > /tmp/alpha4.log
 docker-compose up -d
 ```
 
-## Deploing to DGraph (application server)
+## Deploying to DGraph (application server)
 **IMPORTANT**: read and apply [Using “p” directories coming from different Dgraph clusters](https://dgraph.io/docs/master/deploy/fast-data-loading/bulk-loader/#using-p-directories-coming-from-different-dgraph-clusters) by running
 ```shell
 curl 'localhost:6080/assign?what=timestamps&num=1000000' | jq
