@@ -82,6 +82,20 @@ docker-compose logs alpha4=1 > /tmp/alpha4.log
 docker-compose up -d
 ```
 
+### development server specs
+
+Processes command lines:
+```shell
+/root/go/bin/dgraph zero --replicas 1 --bindall --cwd /data2/pepi/dgraph-data-no-docker-single/zero1 --port_offset=0 --logtostderr --expose_trace --profile_mode block --block_rate 10 -v=2 --telemetry sentry=false
+/root/go/bin/dgraph alpha --zero=localhost:5080 --security whitelist=0.0.0.0/0 --cache size-mb=20000;percentage=50,30,20; --cwd /data2/pepi/dgraph-data-no-docker-single/alpha1 --port_offset=0 --logtostderr --expose_trace --profile_mode block --block_rate 10 -v=2 --telemetry sentry=false
+```
+Hardware specs:
+```shell
+Architecture:        x86_64
+CPU(s):              48
+Total online memory: 64G
+```
+
 ## Deploying to DGraph (application server)
 **IMPORTANT**: read and apply [Using “p” directories coming from different Dgraph clusters](https://dgraph.io/docs/master/deploy/fast-data-loading/bulk-loader/#using-p-directories-coming-from-different-dgraph-clusters) by running
 ```shell
