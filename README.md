@@ -21,7 +21,7 @@ Licensing information in [LICENSE.md](./LICENSE.md)
 
 # Importing Wikidata to DGraph
 
-This repo contains instructions so create a Dgraph database from a Wikidata dump; it imports a selected set of properties, in English language only.
+This repo contains instructions to create a Dgraph database from a Wikidata dump; it imports a selected set of properties, in English language only.
 
 ## Downloading Wikidata dump
 
