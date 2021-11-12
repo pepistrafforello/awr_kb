@@ -29,7 +29,7 @@ use [`wikidata-tools/wd_download_latest.sh`](wikidata-tools/wd_download_latest.s
 
 ## Converting Wikidata dump to RDF N-quads
 
-check/change hard-coded input file name in wikidata-tools/wd2dgraph2.py
+If needed, check/change hard-coded input file name in [`wikidata-tools/wd2dgraph2.py`](wikidata-tools/wd2dgraph2.py)
 
 ```
 cd wikidata-tools
